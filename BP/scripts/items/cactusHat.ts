@@ -15,6 +15,7 @@ world.afterEvents.entityHurt.subscribe(event => {
             cause: EntityDamageCause.thorns,
             damagingEntity: entity
         })
-        world.playSound('damage.thorns', entity.location)
+
+        entity.dimension.playSound('damage.thorns', entity.location)
     }
 })

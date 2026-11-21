@@ -1,10 +1,5 @@
 import { world, Dimension, MolangVariableMap, EntityHealthComponent, EntityTypeFamilyComponent } from '@minecraft/server'
 
-const particleVariables = new MolangVariableMap()
-particleVariables.setFloat('emitter_radius', 0.75)
-particleVariables.setFloat('velocity_scalar', 2)
-particleVariables.setFloat('emitter_intensity', 4)
-
 world.afterEvents.entityDie.subscribe(event => {
     const entity = event.deadEntity
     const familyComponent = entity.getComponent('minecraft:type_family') as EntityTypeFamilyComponent
@@ -44,7 +39,7 @@ world.afterEvents.entityHealthChanged.subscribe(event => {
         else {
             dimension.playSound('mob.beacon.hurt', entity.location)
         }
-        dimension.spawnParticle('battle:glass_shards', entity.getHeadLocation(), particleVariables)
+        dimension.spawnParticle('battle:glass_shards', entity.getHeadLocation(), getShardParticleVariables())
     }
     entity.nameTag = `${Math.floor(health.currentValue)}/100`
     entity.setProperty('battle:cracked_level', getCrackedLevel(event.newValue))
@@ -84,4 +79,12 @@ function searchForBeacon(dimension: Dimension) {
     return dimension.getEntities({
         type: 'battle:beacon'
     })
+}
+
+function getShardParticleVariables() {
+    const particleVariables = new MolangVariableMap()
+    particleVariables.setFloat('emitter_radius', 0.75)
+    particleVariables.setFloat('velocity_scalar', 2)
+    particleVariables.setFloat('emitter_intensity', 4)
+    return particleVariables
 }

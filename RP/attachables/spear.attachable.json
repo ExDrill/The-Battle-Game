@@ -10,15 +10,15 @@
                 "default": "textures/entity/spear"
             },
             "geometry": {
-                "default": "geometry.spear"
+                "default": "geometry.battle.spear"
             },
             "animations": {
-                "first_person": "animation.spear.first_person",
-                "third_person": "animation.spear.third_person",
-                "first_person_charge": "animation.spear.first_person_charge",
-                "first_person_jab": "animation.spear.first_person_jab",
-                "controller": "controller.animation.spear",
-                "first_person_controller": "controller.animation.spear.first_person"
+                "first_person": "animation.battle.spear.first_person",
+                "third_person": "animation.battle.spear.third_person",
+                "first_person_charge": "animation.battle.spear.first_person_charge",
+                "first_person_jab": "animation.battle.spear.first_person_jab",
+                "controller": "controller.animation.battle.spear",
+                "first_person_controller": "controller.animation.battle.spear.first_person"
             },
             "scripts": {
                 "pre_animation": [

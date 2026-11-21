@@ -1,4 +1,4 @@
-import { Vector3, BlockPermutation } from '@minecraft/server'
+import { Vector3 } from '@minecraft/server'
 import PlacedDecorator from './world/decorators/placed_decorator'
 
 export type DefaultItemStack = {

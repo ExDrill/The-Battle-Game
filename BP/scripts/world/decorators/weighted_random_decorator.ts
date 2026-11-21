@@ -2,7 +2,7 @@ import { Dimension, Vector3 } from '@minecraft/server'
 import { DecoratorChoice } from '../../types'
 import Tile from '../tile'
 import Decorator from './decorator'
-import Random from '../../utils/random_utils'
+import Random from '../../utils/random'
 
 export default class WeightedRandomDecorator extends Decorator {
     private readonly choices: DecoratorChoice[]

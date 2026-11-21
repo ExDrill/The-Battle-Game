@@ -1,5 +1,5 @@
 import { Dimension, Vector3 } from '@minecraft/server'
-import Random from '../../utils/random_utils'
+import Random from '../../utils/random'
 import Tile from '../tile'
 
 export default abstract class PlacementRule {

@@ -1,0 +1,23 @@
+{
+    "format_version": "1.26.0",
+    "minecraft:crafting_items_catalog": {
+        "categories": [
+            {
+                "category_name": "equipment",
+                "groups": [
+                    {
+                        "group_identifier": {
+                            "icon": "battle:allay_bottle",
+                            "name": "battle:item_group.name.summon"
+                        },
+                        "items": [
+                            "battle:allay_bottle",
+                            "battle:loyal_bone",
+                            "battle:otherworldly_diamond"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

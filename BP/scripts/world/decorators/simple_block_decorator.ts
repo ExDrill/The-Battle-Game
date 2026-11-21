@@ -1,7 +1,7 @@
 import { Dimension, Vector3, BlockPermutation } from '@minecraft/server'
 import Tile from '../tile'
 import Decorator from './decorator'
-import Random from '../../utils/random_utils'
+import Random from '../../utils/random'
 
 export default class SimpleBlockDecorator extends Decorator {
     private name: string
@@ -14,15 +14,9 @@ export default class SimpleBlockDecorator extends Decorator {
     }
 
     public place(tile: Tile, dimension: Dimension, random: Random, origin: Vector3): void {
-        const permutation = BlockPermutation.resolve(this.name, this.states)
         const block = dimension.getBlock(origin)
+        if (!block) return
         
-    
-        try {
-            block.setPermutation(permutation)
-        }
-        catch (err) {
-            console.warn(err)
-        }
+        block.setPermutation(BlockPermutation.resolve(this.name, this.states))
     }
 }

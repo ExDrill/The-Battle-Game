@@ -1,6 +1,4 @@
 import { world } from '@minecraft/server'
-import SummonComponent from '../components/summon_component'
-import SlimeScimitarComponent from '../components/slime_scimitar_component'
 
 world.afterEvents.playerSpawn.subscribe(event => {
     const player = event.player
@@ -9,7 +7,7 @@ world.afterEvents.playerSpawn.subscribe(event => {
     player.setDynamicProperty('battle:previous_volume', 'none')
 })
 
-world.afterEvents.worldInitialize.subscribe(event => {
+world.afterEvents.worldLoad.subscribe(() => {
     world.gameRules.keepInventory = true
     world.gameRules.showCoordinates = true
     world.gameRules.doMobSpawning = false
@@ -20,12 +18,4 @@ world.afterEvents.worldInitialize.subscribe(event => {
     world.gameRules.doMobSpawning = false
     world.gameRules.mobGriefing = false
     world.gameRules.doWeatherCycle = false
-})
-
-world.beforeEvents.worldInitialize.subscribe(event => {
-    const itemRegistry = event.itemComponentRegistry
-    itemRegistry.registerCustomComponent('battle:wolf_summon', new SummonComponent('battle:wolf'))
-    itemRegistry.registerCustomComponent('battle:allay_summon', new SummonComponent('battle:allay'))
-    itemRegistry.registerCustomComponent('battle:bootrap_summon', new SummonComponent('battle:bootrap'))
-    itemRegistry.registerCustomComponent('battle:slime_scimitar', new SlimeScimitarComponent())
 })

@@ -1,11 +1,11 @@
 {
-	"format_version": "1.21.10",
+	"format_version": "1.26.0",
 	"minecraft:item": {
 		"description": {
 			"identifier": "battle:slime_scimitar",
 			"menu_category": {
 				"category": "equipment",
-				"group": "itemGroup.name.specialWeapon"
+				"group": "minecraft:itemGroup.name.specialWeapon"
 			}
 		},
 		"components": {
@@ -13,10 +13,11 @@
 			"minecraft:hand_equipped": true,
 			"minecraft:max_stack_size": 1,
 			"minecraft:damage": 4,
-			"minecraft:can_destroy_in_creative": false,
-			"minecraft:custom_components": [
-				"battle:slime_scimitar"
-			]
+			"minecraft:durability": {
+				"max_durability": 250
+			},
+			"battle:slime_scimitar": {},
+			"minecraft:can_destroy_in_creative": false
 		}
 	}
 }

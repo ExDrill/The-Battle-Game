@@ -1,5 +1,5 @@
-import { Dimension, Vector3, BlockPermutation } from '@minecraft/server'
-import Random from '../..//utils/random_utils'
+import { Dimension, Vector3 } from '@minecraft/server'
+import Random from '../../utils/random'
 import ConditionalRule from './conditional_rule'
 
 export default class RarityRule extends ConditionalRule {

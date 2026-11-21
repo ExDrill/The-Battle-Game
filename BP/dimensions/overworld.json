@@ -1,5 +1,5 @@
 {
-	"format_version": "1.19.70",
+	"format_version": "1.26.50",
 	"minecraft:dimension": {
 		"description": {
 			"identifier": "minecraft:overworld"
@@ -8,9 +8,9 @@
 			"minecraft:generation": {
 				"generator_type": "void"
 			},
-			"minecraft:dimension_bounds": {
-				"min": 0,
-				"max": 128
+			"minecraft:dimension_height": {
+				"min_y": 0,
+				"height_range": 128
 			}
 		}
 	}

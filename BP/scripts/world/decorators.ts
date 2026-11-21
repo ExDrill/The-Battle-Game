@@ -11,7 +11,7 @@ import SpreadRule from './rules/spread_rule'
 import BlockFilterRule from './rules/block_filter_rule'
 
 import { HeightmapType } from '../types'
-import { Vector3d } from '../utils/vector_utils'
+import { Vector3d } from '../utils/vector'
 
 export const TALL_GRASS = new SimpleBlockDecorator('minecraft:tallgrass', {})
 export const DOUBLE_TALL_GRASS = new SimpleBlockDecorator('minecraft:double_plant', {double_plant_type: 'grass'})

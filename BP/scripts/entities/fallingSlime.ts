@@ -1,15 +1,17 @@
 import { world, Dimension, Entity, Vector3, EntityProjectileComponent, EntityTypeFamilyComponent } from '@minecraft/server'
 
 world.afterEvents.projectileHitBlock.subscribe(event => {
-    if (event.projectile.typeId != 'battle:falling_slime') return
-    if (event.projectile.isValid()) {
+    if (event.projectile.typeId !== 'battle:falling_slime') return
+
+    if (event.projectile.isValid) {
         onSlimeLand(event.projectile, event.location)
     }
 })
 
 world.afterEvents.projectileHitEntity.subscribe(event => {
-    if (event.projectile.typeId != 'battle:falling_slime') return
-    if (event.projectile.isValid()) {
+    if (event.projectile.typeId !== 'battle:falling_slime') return
+
+    if (event.projectile.isValid) {
         onSlimeLand(event.projectile, event.location)
     }
 })
@@ -40,7 +42,8 @@ function onSlimeLand(projectile: Entity, location: Vector3) {
     const slime = dimension.spawnEntity('battle:slime', location)
     slime.triggerEvent('battle:from_king_jello')
     dimension.spawnParticle('battle:small_stomp_emitter', effectLocation)
-    world.playSound('mob.falling_slime.land', location)
+    dimension.playSound('mob.falling_slime.land', location)
+
     projectile.remove()
 }
 

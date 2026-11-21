@@ -1,6 +1,6 @@
 import { Dimension, Vector3, BlockPermutation } from '@minecraft/server'
 import { BlockFilter } from '../../types'
-import Random from '../..//utils/random_utils'
+import Random from '../../utils/random'
 import ConditionalRule from './conditional_rule'
 
 export default class BlockFilterRule extends ConditionalRule {
@@ -13,10 +13,14 @@ export default class BlockFilterRule extends ConditionalRule {
 
     public shouldPlace(dimension: Dimension, random: Random, origin: Vector3): boolean {
         const block = dimension.getBlock(origin)
+        if (!block) return false
+
         let successes = 0
         
         for (const blockFilter of this.blockFilters) {
             const offsetBlock = block.offset(blockFilter.offset)
+            if (!offsetBlock) continue
+
             const filterPermutation = BlockPermutation.resolve(blockFilter.name, blockFilter.states)
 
             if (offsetBlock.permutation == filterPermutation) {

@@ -1,6 +1,6 @@
 import { Dimension, Vector3 } from '@minecraft/server'
-import { Vector3d, VectorUtils } from '../../utils/vector_utils'
-import Random from '../../utils/random_utils'
+import { Vector3d, VectorUtils } from '../../utils/vector'
+import Random from '../../utils/random'
 import ConditionalRule from './conditional_rule'
 
 export default class ScanRule extends ConditionalRule {
@@ -15,8 +15,12 @@ export default class ScanRule extends ConditionalRule {
         for (let x = -this.size.x; x <= this.size.x; x++) {
             for (let y = -this.size.y; y <= this.size.y; y++) {
                 for (let z = -this.size.z; z <= this.size.z; z++) {
-                    const block = dimension.getBlock(new Vector3d(origin.x + x, origin.y + y, origin.z + z))
-                    if (!block.isAir) return false
+                    const offset = new Vector3d(x, y, z)
+                    const block = dimension.getBlock(VectorUtils.add(origin, offset))
+
+                    if (block && !block.isAir) {
+                        return false
+                    }
                 }
             }
         }

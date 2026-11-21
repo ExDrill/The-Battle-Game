@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animation_controllers": {
-		"controller.animation.spear": {
+		"controller.animation.battle.spear": {
 			"initial_state": "first_person",
 			"states": {
 				"first_person": {
@@ -27,7 +27,7 @@
 				}
 			}
 		},
-		"controller.animation.spear.first_person": {
+		"controller.animation.battle.spear.first_person": {
 			"initial_state": "default",
 			"states": {
 				"default": {

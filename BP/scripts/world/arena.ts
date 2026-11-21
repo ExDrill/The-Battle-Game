@@ -1,15 +1,15 @@
-import { world, system, StructureRotation, Vector3 } from '@minecraft/server'
-import { Vector3d } from '../utils/vector_utils'
+import { world, StructureRotation, Vector3, Dimension } from '@minecraft/server'
+import { Vector3d } from '../utils/vector'
 import Tile from './tile'
 import * as Decorators from './decorators'
 
-const overworld = world.getDimension('overworld')
-
 export default class Arena {
+    private readonly dimension: Dimension
     private readonly id: string
     private readonly size: number
     
-    public constructor(id: string, size: number) {
+    public constructor(dimension: Dimension, id: string, size: number) {
+        this.dimension = dimension
         this.id = id
         this.size = size
     }
@@ -26,7 +26,7 @@ export default class Arena {
     }
 
     private async placeTile(tile: Tile, tileX: number, tileZ: number) {
-        tile.place(overworld, tileX, tileZ)
+        tile.place(this.dimension, tileX, tileZ)
     }
 
     private getTileAt(tileX: number, tileZ: number): Tile {

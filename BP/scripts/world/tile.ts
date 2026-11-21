@@ -1,7 +1,7 @@
-import { world, system, StructureRotation, Vector3, Dimension } from '@minecraft/server'
-import { Vector3d, VectorUtils } from '../utils/vector_utils'
+import { world, StructureRotation, Vector3, Dimension } from '@minecraft/server'
+import { Vector3d, VectorUtils } from '../utils/vector'
 import PlacedDecorator from './decorators/placed_decorator'
-import Random from '../utils/random_utils'
+import Random from '../utils/random'
 
 const rotationMap: Map<StructureRotation, string> = new Map([
     [StructureRotation.None, '0_degrees'],
@@ -10,7 +10,6 @@ const rotationMap: Map<StructureRotation, string> = new Map([
     [StructureRotation.Rotate90, '90_degrees']
 ])
 const random = new Random(100)
-const structureManager = world.structureManager
 
 export default class Tile {
     private readonly location: string
@@ -29,7 +28,7 @@ export default class Tile {
         const tileStart = new Vector3d(tileX * 16, 0, tileZ * 16)
         const tileEnd = VectorUtils.add(tileStart, new Vector3d(15, 0, 15))
         
-        structureManager.place(this.location, dimension, tileStart, {
+        world.structureManager.place(this.location, dimension, tileStart, {
             rotation: this.rotation
         })
         this.scanHeightmap(dimension, tileStart, tileEnd)
@@ -39,13 +38,12 @@ export default class Tile {
     private scanHeightmap(dimension: Dimension, tileStart: Vector3, tileEnd: Vector3) {
         for (let x = tileStart.x; x <= tileEnd.x; x++) {
             for (let z = tileStart.z; z <= tileEnd.z; z++) {
-                const scanner = dimension.getBlockFromRay(new Vector3d(x, 32, z), new Vector3d(0, -1, 0), {
+                const hit = dimension.getBlockFromRay(new Vector3d(x, 32, z), new Vector3d(0, -1, 0), {
                     maxDistance: 32
                 })
-                const floorBlock = scanner.block
-                if (floorBlock) {
-                    this.heightmap.push(floorBlock.location)
-                }
+                if (!hit) continue
+
+                this.heightmap.push(hit.block.location)
             }
         }
     }

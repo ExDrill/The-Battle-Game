@@ -1,5 +1,5 @@
 import { world, Dimension, Player, Entity, Vector3, EntityProjectileComponent } from '@minecraft/server'
-import { Vector3d, VectorUtils } from '../utils/vector_utils'
+import { Vector3d, VectorUtils } from '../utils/vector'
 import { NON_LIVING_ENTITIES } from '../constants'
 
 const excludeTypes = getExcludedTypes()
@@ -31,7 +31,7 @@ world.afterEvents.dataDrivenEntityTrigger.subscribe(event => {
 world.afterEvents.entityHurt.subscribe(event => {
     const entity = event.hurtEntity
 
-    if (entity.typeId == 'battle:king_jello' && entity.isValid()) {
+    if (entity.typeId == 'battle:king_jello' && entity.isValid) {
         entity.playAnimation('animation.king_jello.hurt')
     }
 })
@@ -39,9 +39,10 @@ world.afterEvents.entityHurt.subscribe(event => {
 function performStompAttack(entity: Entity) {
     const dimension = entity.dimension
     for (const target of getKnockbackTargets(5, entity.location, dimension)) {
-        const knockbackDir = getLaunchDirection(entity, target)
+        const knockbackDir = VectorUtils.multiply(getLaunchDirection(entity, target), 6)
+        
         try {
-            target.applyKnockback(knockbackDir.x, knockbackDir.z, 6, 0.25)
+            target.applyKnockback(knockbackDir, 0.25)
         }
         catch {
             console.warn(target.typeId)
@@ -80,9 +81,10 @@ function summonMinion(entity: Entity) {
 function performKnockbackRoar(entity: Entity) {
     const dimension = entity.dimension
     for (const target of getKnockbackTargets(7, entity.location, dimension)) {
-        const knockbackDir = getLaunchDirection(entity, target)
+        const knockbackDir = VectorUtils.multiply(getLaunchDirection(entity, target), 6)
+        
         try {
-            target.applyKnockback(knockbackDir.x, knockbackDir.z, 6, 0.5)
+            target.applyKnockback(knockbackDir, 0.25)
         }
         catch {
             console.warn(target.typeId)
@@ -131,7 +133,8 @@ function getKnockbackTargets(maxDistance: number, location: Vector3, dimension: 
 }
 
 function getExcludedTypes() {
-    const types = NON_LIVING_ENTITIES
-    types.push('battle:king_jello') // King Jello shouldn't be affected by their own projectiles lol
-    return types
+    return [
+        'battle:king_jello',
+        ...NON_LIVING_ENTITIES
+    ]
 }

@@ -1,19 +1,23 @@
 {
-	"format_version": "1.21.10",
+	"format_version": "1.26.0",
 	"minecraft:item": {
 		"description": {
 			"identifier": "battle:allay_bottle",
 			"menu_category": {
 				"category": "equipment",
-				"group": "itemGroup.name.summon"
+				"group": "battle:item_group.name.summon"
 			}
 		},
 		"components": {
-			"minecraft:icon": "allay_bottle",
-			"minecraft:max_stack_size": 1,
-			"minecraft:custom_components": [
-				"battle:allay_summon"
-			]
+			"minecraft:icon": {
+				"textures": {
+					"default": "allay_bottle"
+				}
+			},
+			"battle:pet_summon": {
+				"entity": "battle:allay"
+			},
+			"minecraft:max_stack_size": 1
 		}
 	}
 }

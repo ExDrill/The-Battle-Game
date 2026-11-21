@@ -1,11 +1,11 @@
 {
-    "format_version": "1.21.10",
+    "format_version": "1.26.0",
     "minecraft:item": {
         "description": {
             "identifier": "battle:cactus_hat",
             "menu_category": {
 				"category": "equipment",
-                "group": "itemGroup.name.specialEquipment"
+                "group": "minecraft:itemGroup.name.specialEquipment"
 			}
         },
         "components": {
@@ -14,6 +14,9 @@
                 "protection": 2,
                 "slot": "slot.armor.head"
             },
+			"minecraft:durability": {
+				"max_durability": 276
+			},
             "minecraft:max_stack_size": 1
         }
     }

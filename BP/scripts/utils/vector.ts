@@ -49,7 +49,7 @@ export class VectorUtils {
 
     public static zero: Vector3 = new Vector3d(0, 0, 0)
 
-    public static add(first: Vector3, second: Vector3) {
+    public static add(first: Vector3, second: Vector3): Vector3 {
         return {
             x: first.x + second.x,
             y: first.y + second.y,
@@ -57,7 +57,7 @@ export class VectorUtils {
         }
     }
 
-    public static subtract(first: Vector3, second: Vector3) {
+    public static subtract(first: Vector3, second: Vector3): Vector3 {
         return {
             x: first.x - second.x,
             y: first.y - second.y,
@@ -65,7 +65,7 @@ export class VectorUtils {
         }
     }
     
-    public static multiply(first: Vector3, second: Vector3 | number) {
+    public static multiply(first: Vector3, second: Vector3 | number): Vector3 {
         if (typeof second == 'number') {
             return {
                 x: first.x * second,
@@ -80,7 +80,7 @@ export class VectorUtils {
         }
     }
 
-    public static divide(first: Vector3, second: Vector3 | number) {
+    public static divide(first: Vector3, second: Vector3 | number): Vector3 {
         if (typeof second == 'number') {
             return {
                 x: first.x / second,
@@ -95,7 +95,7 @@ export class VectorUtils {
         }
     }
 
-    public static distance(first: Vector3, second: Vector3) {
+    public static distance(first: Vector3, second: Vector3): number {
         return Math.hypot(first.x - second.x, first.y - second.y, first.z - second.z)
     }
 }
