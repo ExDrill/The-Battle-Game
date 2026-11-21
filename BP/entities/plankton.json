@@ -1,5 +1,5 @@
 {
-    "format_version": "1.20.60",
+    "format_version": "1.26.50",
     "minecraft:entity": {
         "description": {
             "identifier": "battle:plankton",
@@ -31,7 +31,8 @@
             "minecraft:navigation.walk": {},
             "minecraft:jump.static": {},
             "minecraft:physics": {},
-            "minecraft:pushable": {},
+            "minecraft:pushable_by_entity": {},
+            "minecraft:pushable_by_block": {},
             "minecraft:persistent": {},
             "minecraft:nameable": {},
             "minecraft:can_climb": {},

@@ -10,7 +10,6 @@ item.battle:allay_bottle=Bottle of Allay
 item.battle:loyal_bone=Loyal Bone
 item.battle:otherworldly_diamond=Otherworldly Diamond
 item.battle:hammer=Hammer
-item.battle:spear=Spear
 
 item.battle:quiver=Quiver
 item.battle:quiver.desc=Increases the accuracy and damage of arrows
@@ -18,11 +17,10 @@ item.battle:quiver.desc=Increases the accuracy and damage of arrows
 item.battle:cactus_hat=Cactus Hat
 item.battle:cactus_hat.desc=Attackers will receive 4 damage
 
-item.spawn_egg.entity.battle:slime.name=Spawn Slime
-item.spawn_egg.entity.battle:tropical_slime.name=Spawn Tropical Slime
-item.spawn_egg.entity.battle:king_jello.name=Spawn King Jello
-item.spawn_egg.entity.battle:plankton.name=Spawn Plankton
-item.spawn_egg.entity.battle:villager_npc.name=Spawn Villager NPC
+item.spawn_egg.entity.battle:slime.name=Slime Spawn Egg
+item.spawn_egg.entity.battle:tropical_slime.name=Tropical Slime Spawn Egg
+item.spawn_egg.entity.battle:king_jello.name=King Jello Spawn Egg
+item.spawn_egg.entity.battle:plankton.name=Plankton Spawn Egg
 
 ## Entities
 entity.battle:slime.name=Slime
@@ -32,4 +30,3 @@ entity.battle:plankton.name=Plankton
 entity.battle:allay.name=Allay
 entity.battle:wolf.name=Wolf
 entity.battle:bootrap.name=Bootrap
-entity.battle:villager_npc.name=Villager NPC

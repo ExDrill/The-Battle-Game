@@ -1,12 +1,12 @@
 {
     "entity_sounds": {
         "entities": {
-            "minecraft:enderman": {
+            "battle:enderman": {
                 "volume": 1,
                 "pitch": [0.8, 1.2],
                 "events": {
                     "ambient": "mob.endermen.idle",
-                    "attack": "mob.endermen.swing",
+                    "ambient.tame": "mob.endermen.scream",
                     "hurt": "mob.endermen.hit",
                     "death": "mob.endermen.death"
                 }

@@ -1,5 +1,5 @@
 {
-	"format_version": "1.20.60",
+	"format_version": "1.26.60",
 	"minecraft:entity": {
 		"description": {
 			"identifier": "battle:king_jello",
@@ -15,7 +15,8 @@
 						"leaping",
 						"charging",
 						"summoning",
-						"roaring"
+						"roaring",
+						"death"
 					]
 				},
 				"battle:second_phase": {
@@ -46,7 +47,10 @@
 					"value": 1.0
 				},
 				"minecraft:movement.jump": {
-					"jump_delay": [ 2, 3 ]
+					"jump_delay": {
+						"min": 2,
+						"max": 3
+					}
 				},
 				"minecraft:jump.static": {
 					"jump_power": 1.25
@@ -89,14 +93,20 @@
 					"value": 2.25
 				},
 				"minecraft:movement.jump": {
-					"jump_delay": [ 1, 1 ]
+					"jump_delay": {
+						"min": 1,
+						"max": 1
+					}
 				},
 				"minecraft:jump.static": {
 					"jump_power": 0.75
 				},
 				"minecraft:timer": {
 					"looping": true,
-					"time": 5,
+					"time": {
+						"min": 5,
+						"max": 5
+					},
 					"time_down_event": {
 						"event": "battle:switch_state",
 						"target": "self"
@@ -220,7 +230,7 @@
 								"value": "roaring"
 							}
 						},
-						"deals_damage": false
+						"deals_damage": "no"
 					},
 					{
 						"cause": "all",
@@ -244,7 +254,7 @@
 					},
 					{
 						"cause": "fall",
-						"deals_damage": false
+						"deals_damage": "no"
 					},
 					{
 						"cause": "entity_explosion",
@@ -363,9 +373,7 @@
 				"jump_power": 1.25
 			},
 			"minecraft:nameable": {},
-			"minecraft:pushable": {
-				"is_pushable": false
-			},
+			"minecraft:pushable_by_block": {},
 			"minecraft:can_climb": {},
 			"minecraft:physics": {},
 			"minecraft:persistent": {},
@@ -392,7 +400,7 @@
 			},
 			"battle:toggle_second_phase": {
 				"set_property": {
-					"battle:second_phase": "query.property('battle:second_phase') == true ? false : true"
+					"battle:second_phase": "q.property('battle:second_phase') ? false : true"
 				}
 			},
 			"battle:switch_state": {

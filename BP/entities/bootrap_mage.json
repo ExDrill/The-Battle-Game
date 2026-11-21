@@ -1,5 +1,5 @@
 {
-    "format_version": "1.20.60",
+    "format_version": "1.26.50",
     "minecraft:entity": {
         "description": {
             "identifier": "battle:bootrap_mage",
@@ -21,6 +21,8 @@
             "minecraft:nameable": {},
             "minecraft:persistent": {},
             "minecraft:physics": {},
+            "minecraft:pushable_by_entity": {},
+            "minecraft:pushable_by_block": {},
             "minecraft:can_fly": {},
             "minecraft:is_hidden_when_invisible": {},
             "minecraft:conditional_bandwidth_optimization": {}

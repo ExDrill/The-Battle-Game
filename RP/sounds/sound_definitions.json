@@ -14,13 +14,13 @@
 				"sounds/random/sweep7"
 			]
 		},
-		"mob.endermen.swing": {
+		"mob.enderman.swing": {
 			"max_distance": 12,
 			"category": "hostile",
 			"sounds": [
-				"sounds/mob/endermen/swing1",
-				"sounds/mob/endermen/swing2",
-				"sounds/mob/endermen/swing3"
+				"sounds/mob/enderman/swing1",
+				"sounds/mob/enderman/swing2",
+				"sounds/mob/enderman/swing3"
 			]
 		},
 		"mob.beacon.hurt": {
@@ -85,22 +85,6 @@
 			"sounds": [
 				"sounds/mob/plankton/death1",
 				"sounds/mob/plankton/death2"
-			]
-		},
-		"item.spear.jab": {
-			"max_distance": 12,
-			"category": "player",
-			"sounds": [
-				"sounds/item/spear/jab1",
-				"sounds/item/spear/jab2",
-				"sounds/item/spear/jab3"
-			]
-		},
-		"item.spear.land_hit": {
-			"max_distance": 12,
-			"category": "player",
-			"sounds": [
-				"sounds/item/spear/land_hit"
 			]
 		}
 	}

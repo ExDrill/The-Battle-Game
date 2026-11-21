@@ -1,10 +1,26 @@
 {
-    "format_version": "1.20.60",
+    "format_version": "1.26.50",
     "minecraft:entity": {
         "description": {
-            "identifier": "minecraft:enderman",
+            "identifier": "battle:enderman",
             "is_spawnable": true,
             "is_summonable": true
+        },
+        "component_groups": {
+            "battle:default_ambient_sound": {
+                "minecraft:ambient_sound_interval": {
+                    "event_name": "ambient",
+                    "range": 16,
+                    "value": 8
+                }
+            },
+            "battle:angry_ambient_sound": {
+                "minecraft:ambient_sound_interval": {
+                    "event_name": "ambient.tame",
+                    "range": 4,
+                    "value": 2
+                }
+            }
         },
         "components": {
             "minecraft:health": {
@@ -42,6 +58,17 @@
             },
             "minecraft:loot": {
                 "table": "loot_tables/empty.json"
+            },
+            "minecraft:looked_at": {
+                "search_radius": 16,
+                "find_players_only": true,
+                "look_at_locations": [
+                    {
+                        "location": "head",
+                        "vertical_offset": 1
+                    }
+                ],
+                "set_target": "once_and_stop_scanning"
             },
             "minecraft:hurt_on_condition": {
                 "damage_conditions": [
@@ -83,7 +110,8 @@
                 "random_stop_interval": 0,
                 "reach_multiplier": 5.0,
                 "attack_duration": 0.75,
-                "hit_delay_pct": 0.66
+                "hit_delay_pct": 0.66,
+                "speed_multiplier": 2
             },
             "minecraft:behavior.random_stroll": {
                 "priority": 4
@@ -95,6 +123,12 @@
             "minecraft:behavior.random_look_around": {
                 "priority": 6
             },
+            "minecraft:on_target_acquired": {
+                "event": "battle:on_target_acquired"
+            },
+            "minecraft:on_target_escape": {
+                "event": "battle:on_target_escape"
+            },
             "minecraft:movement.basic": {},
             "minecraft:navigation.walk": {},
             "minecraft:jump.static": {},
@@ -102,9 +136,43 @@
             "minecraft:nameable": {},
             "minecraft:physics": {},
             "minecraft:persistent": {},
-            "minecraft:pushable": {},
+            "minecraft:pushable_by_entity": {},
+            "minecraft:pushable_by_block": {},
             "minecraft:is_hidden_when_invisible": {},
             "minecraft:conditional_bandwidth_optimization": {}
+        },
+        "events": {
+            "minecraft:entity_spawned": {
+                "add": {
+                    "component_groups": [
+                        "battle:default_ambient_sound"
+                    ]
+                }
+            },
+            "battle:on_target_acquired": {
+                "add": {
+                    "component_groups": [
+                        "battle:angry_ambient_sound"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "battle:default_ambient_sound"
+                    ]
+                }
+            },
+            "battle:on_target_escape": {
+                "add": {
+                    "component_groups": [
+                        "battle:default_ambient_sound"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "battle:angry_ambient_sound"
+                    ]
+                }
+            }
         }
     }
 }

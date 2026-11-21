@@ -33,7 +33,7 @@
 				"default": {
 					"transitions": [
 						{
-							"delayed_attacking": "query.is_delayed_attacking"
+							"delayed_attacking": "q.is_delayed_attacking"
 						}
 					]
 				},
@@ -43,7 +43,7 @@
 					],
 					"transitions": [
 						{
-							"default": "query.any_animation_finished"
+							"default": "q.any_animation_finished"
 						}
 					]
 				}

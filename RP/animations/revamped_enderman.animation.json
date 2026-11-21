@@ -415,6 +415,11 @@
 						}
 					}
 				}
+			},
+			"sound_effects": {
+				"0.45": {
+					"effect": "swing"
+				}
 			}
 		}
 	}

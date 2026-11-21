@@ -47,52 +47,29 @@ export class Vector2d implements Vector2 {
 
 export class VectorUtils {
 
-    public static zero: Vector3 = new Vector3d(0, 0, 0)
+    public static readonly ZERO: Vector3 = new Vector3d(0, 0, 0)
 
-    public static add(first: Vector3, second: Vector3): Vector3 {
-        return {
-            x: first.x + second.x,
-            y: first.y + second.y,
-            z: first.z + second.z
-        }
+    public static add(first: Vector3, second: Vector3): Vector3d {
+        return new Vector3d(first.x + second.x, first.y + second.y, first.z + second.z)
     }
 
-    public static subtract(first: Vector3, second: Vector3): Vector3 {
-        return {
-            x: first.x - second.x,
-            y: first.y - second.y,
-            z: first.z - second.z
-        }
+    public static subtract(first: Vector3, second: Vector3): Vector3d {
+        return new Vector3d(first.x - second.x, first.y - second.y, first.z - second.z)
     }
     
-    public static multiply(first: Vector3, second: Vector3 | number): Vector3 {
+    public static multiply(first: Vector3, second: Vector3 | number): Vector3d {
         if (typeof second == 'number') {
-            return {
-                x: first.x * second,
-                y: first.y * second,
-                z: first.z * second
-            }
+            return new Vector3d(first.x * second, first.y * second, first.z * second)
         }
-        return {
-            x: first.x * second.x,
-            y: first.y * second.y,
-            z: first.z * second.z
-        }
+        
+        return new Vector3d(first.x * second.x, first.y * second.y, first.z * second.z)
     }
 
-    public static divide(first: Vector3, second: Vector3 | number): Vector3 {
+    public static divide(first: Vector3, second: Vector3 | number): Vector3d {
         if (typeof second == 'number') {
-            return {
-                x: first.x / second,
-                y: first.y / second,
-                z: first.z / second
-            }
+            return new Vector3d(first.x / second, first.y / second, first.z / second)
         }
-        return {
-            x: first.x / second.x,
-            y: first.y / second.y,
-            z: first.z / second.z
-        }
+        return new Vector3d(first.x / second.x, first.y / second.y, first.z / second.z)
     }
 
     public static distance(first: Vector3, second: Vector3): number {
