@@ -5,7 +5,8 @@
 		"build": "dash_compiler build"
 	},
 	"imports": {
-		"@minecraft/server": "npm:@minecraft/server@2.11.0"
+		"@minecraft/server": "npm:@minecraft/server@2.11.0",
+		"@minecraft/server-graphics": "npm:@minecraft/server-graphics@1.0.0"
 	},
 	"unstable": [
 		"sloppy-imports"

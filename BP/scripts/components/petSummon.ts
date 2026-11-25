@@ -1,4 +1,4 @@
-import { ItemComponentUseEvent, Player, system, CustomComponentParameters, EntityComponentTypes, Entity } from '@minecraft/server'
+import { ItemComponentUseEvent, Player, system, CustomComponentParameters, EntityComponentTypes, Entity, EntityAttachPoint } from '@minecraft/server'
 
 system.beforeEvents.startup.subscribe(event => {
     event.itemComponentRegistry.registerCustomComponent('battle:pet_summon', {
@@ -9,10 +9,10 @@ system.beforeEvents.startup.subscribe(event => {
 function onUse(event: ItemComponentUseEvent, data: CustomComponentParameters): void {
     const user = event.source
     const dimension = user.dimension
-
     const entityId = (data.params as any)['entity'] ?? 'battle:wolf'
 
     const entity = dimension.spawnEntity(entityId, user.location)
+    
     setOwner(entity, user)
     clearItem(user)
 }

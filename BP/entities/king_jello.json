@@ -477,6 +477,10 @@
 							"domain": "battle:state",
 							"value": "charging"
 						}
+					},
+					{
+						"stop_movement": {},
+						"reset_target": {}
 					}
 				]
 			},

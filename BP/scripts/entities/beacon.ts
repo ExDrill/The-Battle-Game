@@ -1,31 +1,25 @@
-import { world, Dimension, MolangVariableMap, EntityHealthComponent, EntityTypeFamilyComponent } from '@minecraft/server'
+import { world, Dimension, MolangVariableMap, EntityComponentTypes, EntityDieAfterEvent, EntitySpawnAfterEvent, EntityHealthChangedAfterEvent } from '@minecraft/server'
 
-world.afterEvents.entityDie.subscribe(event => {
-    const entity = event.deadEntity
-    const familyComponent = entity.getComponent('minecraft:type_family') as EntityTypeFamilyComponent
-    if (!entity.hasComponent('minecraft:type_family')) return
-
-    if (familyComponent.hasTypeFamily('monster')) {
-        const dimension = entity.dimension
-        
-        for (const beacon of searchForBeacon(dimension)) {
-            const health = beacon.getComponent('minecraft:health') as EntityHealthComponent
-            health.setCurrentValue(Math.min(health.effectiveMax, health.currentValue + 5))
-        }
-    }
+world.afterEvents.entitySpawn.subscribe(onBeaconSpawn)
+world.afterEvents.entityHealthChanged.subscribe(onBeaconHealthChanged, {
+    entityTypes: ['battle:beacon']
 })
+world.afterEvents.entityDie.subscribe(onMonsterDie)
 
-world.afterEvents.entitySpawn.subscribe(event => {
+function onBeaconSpawn(event: EntitySpawnAfterEvent) {
     const entity = event.entity
-    if (entity.typeId != 'battle:beacon') return
+    if (entity.typeId !== 'battle:beacon') return
+
     entity.nameTag = '100/100'
-})
+}
 
-world.afterEvents.entityHealthChanged.subscribe(event => {
+function onBeaconHealthChanged(event: EntityHealthChangedAfterEvent) {
     const entity = event.entity
-    if (entity.typeId != 'battle:beacon') return
+    if (!entity.isValid) return
 
-    const health = entity.getComponent('minecraft:health') as EntityHealthComponent
+    const healthComp = entity.getComponent(EntityComponentTypes.Health)
+    if (!healthComp) return
+
     const dimension = entity.dimension
     const hurt = event.newValue < event.oldValue
 
@@ -39,11 +33,32 @@ world.afterEvents.entityHealthChanged.subscribe(event => {
         else {
             dimension.playSound('mob.beacon.hurt', entity.location)
         }
-        dimension.spawnParticle('battle:glass_shards', entity.getHeadLocation(), getShardParticleVariables())
+        dimension.spawnParticle('battle:glass_shards', entity.getHeadLocation(), createShardParticleMap())
     }
-    entity.nameTag = `${Math.floor(health.currentValue)}/100`
+    entity.nameTag = `${Math.floor(healthComp.currentValue)}/100`
     entity.setProperty('battle:cracked_level', getCrackedLevel(event.newValue))
-})
+}
+
+function onMonsterDie(event: EntityDieAfterEvent) {
+    const entity = event.deadEntity
+    if (!entity.isValid) return
+    
+    const typeFamily = entity.getComponent(EntityComponentTypes.TypeFamily)
+    if (!typeFamily || !typeFamily.hasTypeFamily('monster')) return
+
+    const beacons = entity.dimension.getEntities({
+        type: 'battle:beacon'
+    })
+
+    for (const beacon of beacons) {
+        if (!beacon.isValid) continue
+
+        const health = beacon.getComponent('minecraft:health')
+        if (!health) continue
+
+        health.setCurrentValue(Math.min(health.effectiveMax, health.currentValue + 5))
+    }
+}
 
 function getPitch(value: number): number {
     const fraction = value / 100
@@ -75,13 +90,7 @@ function getCrackedLevel(value: number): string {
     return 'none'
 }
 
-function searchForBeacon(dimension: Dimension) {
-    return dimension.getEntities({
-        type: 'battle:beacon'
-    })
-}
-
-function getShardParticleVariables() {
+function createShardParticleMap() {
     const particleVariables = new MolangVariableMap()
     particleVariables.setFloat('emitter_radius', 0.75)
     particleVariables.setFloat('velocity_scalar', 2)

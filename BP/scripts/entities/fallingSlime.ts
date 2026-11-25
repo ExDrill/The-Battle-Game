@@ -1,23 +1,26 @@
-import { world, Dimension, Entity, Vector3, EntityProjectileComponent, EntityTypeFamilyComponent } from '@minecraft/server'
+import { world, Dimension, Entity, Vector3, EntityProjectileComponent, EntityTypeFamilyComponent, ProjectileHitBlockAfterEvent, ProjectileHitEntityAfterEvent, EntityComponentTypes } from '@minecraft/server'
 
-world.afterEvents.projectileHitBlock.subscribe(event => {
-    if (event.projectile.typeId !== 'battle:falling_slime') return
+world.afterEvents.projectileHitBlock.subscribe(onProjectileHitBlock)
+world.afterEvents.projectileHitEntity.subscribe(onProjectileHitEntity)
 
-    if (event.projectile.isValid) {
-        onSlimeLand(event.projectile, event.location)
-    }
-})
+function onProjectileHitBlock(event: ProjectileHitBlockAfterEvent) {
+    const projectile = event.projectile
+    if (!projectile.isValid || projectile.typeId !== 'battle:falling_slime') return
 
-world.afterEvents.projectileHitEntity.subscribe(event => {
-    if (event.projectile.typeId !== 'battle:falling_slime') return
+    onSlimeLand(projectile, event.location)
+}
 
-    if (event.projectile.isValid) {
-        onSlimeLand(event.projectile, event.location)
-    }
-})
+function onProjectileHitEntity(event: ProjectileHitEntityAfterEvent) {
+    const projectile = event.projectile
+    if (!projectile.isValid || projectile.typeId !== 'battle:falling_slime') return
+
+    onSlimeLand(projectile, event.location)
+}
 
 function onSlimeLand(projectile: Entity, location: Vector3) {
-    const component = projectile.getComponent('minecraft:projectile') as EntityProjectileComponent
+    const component = projectile.getComponent(EntityComponentTypes.Projectile)
+    if (!component) return
+
     const owner = component.owner
     const dimension = projectile.dimension
     const effectLocation = {
@@ -39,8 +42,10 @@ function onSlimeLand(projectile: Entity, location: Vector3) {
             z: location.z
         })
     }
+
     const slime = dimension.spawnEntity('battle:slime', location)
     slime.triggerEvent('battle:from_king_jello')
+    
     dimension.spawnParticle('battle:small_stomp_emitter', effectLocation)
     dimension.playSound('mob.falling_slime.land', location)
 

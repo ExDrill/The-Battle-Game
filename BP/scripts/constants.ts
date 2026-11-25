@@ -30,6 +30,7 @@ export const NON_LIVING_ENTITIES = [
     'minecraft:fireworks_rocket',
     'minecraft:fishing_hook',
     'minecraft:hopper_minecart',
+    'minecraft:item',
     'minecraft:lightning_bolt',
     'minecraft:lingering_potion',
     'minecraft:llama_spit',

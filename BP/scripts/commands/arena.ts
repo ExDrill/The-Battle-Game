@@ -1,4 +1,4 @@
-import { CommandPermissionLevel, CustomCommandOrigin, CustomCommandParamType, CustomCommandResult, CustomCommandStatus, system, world } from '@minecraft/server'
+import { CommandPermissionLevel, CustomCommandOrigin, CustomCommandParamType, CustomCommandResult, CustomCommandStatus, system } from '@minecraft/server'
 import Arena from "../world/arena";
 
 system.beforeEvents.startup.subscribe(event => {

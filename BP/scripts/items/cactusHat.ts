@@ -1,21 +1,22 @@
-import { world, EquipmentSlot, EntityDamageCause, EntityEquippableComponent } from '@minecraft/server'
+import { world, EquipmentSlot, EntityDamageCause, EntityEquippableComponent, EntityComponentTypes } from '@minecraft/server'
 
 world.afterEvents.entityHurt.subscribe(event => {
     const entity = event.hurtEntity
-    const equippableComponent = entity.getComponent('minecraft:equippable') as EntityEquippableComponent
-    const source = event.damageSource
+    if (!entity.isValid) return
 
+    const equippableComp = entity.getComponent(EntityComponentTypes.Equippable)
+    if (!equippableComp) return
+
+    const source = event.damageSource
     if (!source.damagingEntity || source.cause == EntityDamageCause.thorns) return
 
-    if (equippableComponent) {
-        const helmetStack = equippableComponent.getEquipment(EquipmentSlot.Head)
-        if (!helmetStack || helmetStack.typeId != 'battle:cactus_hat') return
-        
-        source.damagingEntity.applyDamage(4, {
-            cause: EntityDamageCause.thorns,
-            damagingEntity: entity
-        })
+    const helmetStack = equippableComp.getEquipment(EquipmentSlot.Head)
+    if (!helmetStack || helmetStack.typeId != 'battle:cactus_hat') return
+    
+    source.damagingEntity.applyDamage(4, {
+        cause: EntityDamageCause.thorns,
+        damagingEntity: entity
+    })
 
-        entity.dimension.playSound('damage.thorns', entity.location)
-    }
+    entity.dimension.playSound('damage.thorns', entity.location)
 })

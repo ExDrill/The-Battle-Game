@@ -1,14 +1,22 @@
-import { world, Dimension, Player, Entity, Vector3, EntityProjectileComponent } from '@minecraft/server'
+import { world, Dimension, Player, Entity, Vector3, EntityProjectileComponent, DataDrivenEntityTriggerAfterEvent, EntityHurtAfterEvent } from '@minecraft/server'
 import { Vector3d, VectorUtils } from '../utils/vector'
 import { NON_LIVING_ENTITIES } from '../constants'
 
-const excludeTypes = getExcludedTypes()
+const EXCLUDE_TYPES = [
+    ...NON_LIVING_ENTITIES,
+    'battle:king_jello'
+]
 
-world.afterEvents.dataDrivenEntityTrigger.subscribe(event => {
+world.afterEvents.dataDrivenEntityTrigger.subscribe(onDataDrivenEntityTrigger, {
+    entityTypes: ['battle:king_jello']
+})
+world.afterEvents.entityHurt.subscribe(onEntityHurt, {
+    entityTypes: ['battle:king_jello']
+})
+
+function onDataDrivenEntityTrigger(event: DataDrivenEntityTriggerAfterEvent) {
     const entity = event.entity
     const id = event.eventId
-
-    if (entity.typeId != 'battle:king_jello') return
     
     if (id == 'battle:perform_stomp_attack') {
         performStompAttack(entity)
@@ -26,15 +34,15 @@ world.afterEvents.dataDrivenEntityTrigger.subscribe(event => {
         performDeathExplosion(entity)
         return
     }
-})
+}
 
-world.afterEvents.entityHurt.subscribe(event => {
+function onEntityHurt(event: EntityHurtAfterEvent) {
     const entity = event.hurtEntity
 
     if (entity.typeId == 'battle:king_jello' && entity.isValid) {
         entity.playAnimation('animation.king_jello.hurt')
     }
-})
+}
 
 function performStompAttack(entity: Entity) {
     const dimension = entity.dimension
@@ -128,13 +136,6 @@ function getKnockbackTargets(maxDistance: number, location: Vector3, dimension: 
     return dimension.getEntities({
         location, 
         maxDistance,
-        excludeTypes
+        excludeTypes: EXCLUDE_TYPES
     })
-}
-
-function getExcludedTypes() {
-    return [
-        'battle:king_jello',
-        ...NON_LIVING_ENTITIES
-    ]
 }
