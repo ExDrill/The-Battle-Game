@@ -31,5 +31,5 @@ function performSweep(attacker: Entity, victim: Entity, dimension: Dimension): v
 }
 
 function canSweep(attacker: Entity): boolean {
-    return attacker.typeId == 'minecraft:player' && !attacker.isFalling && !attacker.isSprinting
+    return attacker.typeId === 'minecraft:player' && !attacker.isFalling && !attacker.isSprinting
 }

@@ -1,4 +1,4 @@
-import { world, EquipmentSlot, EntityDamageCause, EntityEquippableComponent, EntityComponentTypes } from '@minecraft/server'
+import { world, EquipmentSlot, EntityDamageCause, EntityComponentTypes } from '@minecraft/server'
 
 world.afterEvents.entityHurt.subscribe(event => {
     const entity = event.hurtEntity

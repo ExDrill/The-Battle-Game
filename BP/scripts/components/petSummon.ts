@@ -18,7 +18,7 @@ function onUse(event: ItemComponentUseEvent, data: CustomComponentParameters): v
 }
 
 function setOwner(summon: Entity, owner: Player): void {
-    const tameable = summon.getComponent('minecraft:tameable')
+    const tameable = summon.getComponent(EntityComponentTypes.Tameable)
     if (!tameable) return
 
     tameable.tame(owner)

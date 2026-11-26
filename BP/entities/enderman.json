@@ -59,6 +59,14 @@
             "minecraft:loot": {
                 "table": "loot_tables/empty.json"
             },
+            "minecraft:teleport": {
+                "random_teleports": true,
+                "min_random_teleport_time": 10,
+                "max_random_teleport_time": 30,
+                "random_teleport_cube": [16, 8, 16],
+                "light_teleport_chance": 0.05,
+                "dark_teleport_chance": 0.05
+            },
             "minecraft:looked_at": {
                 "search_radius": 16,
                 "find_players_only": true,
