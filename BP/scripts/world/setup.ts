@@ -1,12 +1,5 @@
 import { world } from '@minecraft/server'
 
-world.afterEvents.playerSpawn.subscribe(event => {
-    const player = event.player
-    
-    player.setDynamicProperty('battle:volume', 'none')
-    player.setDynamicProperty('battle:previous_volume', 'none')
-})
-
 world.afterEvents.worldLoad.subscribe(() => {
     world.gameRules.keepInventory = true
     world.gameRules.showCoordinates = true

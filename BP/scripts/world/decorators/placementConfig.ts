@@ -1,6 +1,6 @@
 import { Dimension, Vector3 } from '@minecraft/server'
 import Decorator from './decorator'
-import Tile from '../tile'
+import Tile from '../tile.ts'
 import Random from '../../utils/random'
 import PlacementRule from '../rules/placement_rule'
 

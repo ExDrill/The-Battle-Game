@@ -72,8 +72,7 @@
                 "find_players_only": true,
                 "look_at_locations": [
                     {
-                        "location": "head",
-                        "vertical_offset": 1
+                        "location": "head"
                     }
                 ],
                 "set_target": "once_and_stop_scanning"

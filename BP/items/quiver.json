@@ -14,6 +14,11 @@
             "minecraft:durability": {
                 "max_durability": 128
             },
+            "battle:lore": {
+                "entries": [
+                    "item.battle:quiver.desc"
+                ]
+            },
             "minecraft:wearable": {
                 "slot": "slot.armor.chest"
             }

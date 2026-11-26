@@ -1,4 +1,4 @@
-import { world, StructureRotation, Vector3, Dimension } from '@minecraft/server'
+import { StructureRotation, Vector3, Dimension } from '@minecraft/server'
 import { Vector3d } from '../utils/vector'
 import Tile from './tile'
 import * as Decorators from './decorators'
@@ -7,6 +7,7 @@ export default class Arena {
     private readonly dimension: Dimension
     private readonly id: string
     private readonly size: number
+
     
     public constructor(dimension: Dimension, id: string, size: number) {
         this.dimension = dimension
@@ -20,38 +21,35 @@ export default class Arena {
         for (let tileX = -this.size; tileX <= this.size; tileX++) {
             for (let tileZ = -this.size; tileZ <= this.size; tileZ++) {
                 const tile = this.getTileAt(tileX, tileZ)
-                this.placeTile(tile, tileStart.x + tileX, tileStart.z + tileZ)
+                
+                await tile.place(this.dimension, tileStart.x + tileX, tileStart.z + tileZ)
             }
         }
     }
 
-    private async placeTile(tile: Tile, tileX: number, tileZ: number) {
-        tile.place(this.dimension, tileX, tileZ)
-    }
-
     private getTileAt(tileX: number, tileZ: number): Tile {
-        if (tileX == this.size && tileZ == this.size) {
+        if (tileX === this.size && tileZ === this.size) {
             return this.getCornerTile(StructureRotation.Rotate180)
         }
-        if (tileX == -this.size && tileZ == this.size) {
+        if (tileX === -this.size && tileZ === this.size) {
             return this.getCornerTile(StructureRotation.Rotate270)
         }
-        if (tileX == this.size && tileZ == -this.size) {
+        if (tileX === this.size && tileZ === -this.size) {
             return this.getCornerTile(StructureRotation.Rotate90)
         }
-        if (tileX == -this.size && tileZ == -this.size) {
+        if (tileX === -this.size && tileZ === -this.size) {
             return this.getCornerTile(StructureRotation.None)
         }
-        if (tileX == this.size) {
+        if (tileX === this.size) {
             return this.getSideTile(StructureRotation.Rotate90)
         }
-        if (tileX == -this.size) {
+        if (tileX === -this.size) {
             return this.getSideTile(StructureRotation.Rotate270)
         }
-        if (tileZ == this.size) {
+        if (tileZ === this.size) {
             return this.getSideTile(StructureRotation.Rotate180)
         }
-        if (tileZ == -this.size) {
+        if (tileZ === -this.size) {
             return this.getSideTile(StructureRotation.None)
         }
         return this.getFloorTile()

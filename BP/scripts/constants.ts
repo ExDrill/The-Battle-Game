@@ -1,13 +1,13 @@
-import { DefaultItemStack } from './types'
-
-export const DEFAULT_ITEM_STACKS: Map<string, DefaultItemStack> = new Map()
-
-DEFAULT_ITEM_STACKS.set('battle:quiver', {
-    lore: ['', '§r§9Sharpshooter:', '§r§9Increased accuracy and damage of arrows']
-})
-DEFAULT_ITEM_STACKS.set('battle:cactus_hat', {
-    lore: ['', '§r§9Natural Thorns:', '§r§9Reflects 4 damage upon attackers']
-})
+export const LORE: Record<string, string[]> = {
+    'battle:quiver': [
+        '§r§9Sharpshooter:',
+        '§r§9Increased accuracy and damage of arrows'
+    ],
+    'battle:cactus_hat': [
+        '§r§9Natural Thorns:',
+        '§r§9Reflects 4 damage upon attackers'
+    ]
+}
 
 export const NON_LIVING_ENTITIES = [
     // Custom

@@ -9,8 +9,6 @@ item.battle:slime_scimitar=Slime Scimitar
 item.battle:allay_bottle=Bottle of Allay
 item.battle:loyal_bone=Loyal Bone
 item.battle:otherworldly_diamond=Otherworldly Diamond
-item.battle:hammer=Hammer
-
 item.battle:quiver=Quiver
 item.battle:quiver.desc=Increases the accuracy and damage of arrows
 
@@ -30,3 +28,6 @@ entity.battle:plankton.name=Plankton
 entity.battle:allay.name=Allay
 entity.battle:wolf.name=Wolf
 entity.battle:bootrap.name=Bootrap
+
+## Item Groups
+battle:item_group.summon=Summons

@@ -3,7 +3,7 @@
     "minecraft:entity": {
         "description": {
             "identifier": "battle:bootrap_mage",
-            "is_spawnable": false, // placeholder
+            "is_spawnable": true,
             "is_summonable": true
         },
         "components": {

@@ -1,6 +1,6 @@
-import { world, StructureRotation, Vector3, Dimension } from '@minecraft/server'
+import { world, StructureRotation, Vector3, Dimension, system } from '@minecraft/server'
 import { Vector3d, VectorUtils } from '../utils/vector'
-import PlacedDecorator from './decorators/placed_decorator'
+import PlacedDecorator from './decorators/placementConfig'
 import Random from '../utils/random'
 
 const rotationMap: Map<StructureRotation, string> = new Map([
@@ -28,11 +28,23 @@ export default class Tile {
         const tileStart = new Vector3d(tileX * 16, 0, tileZ * 16)
         const tileEnd = VectorUtils.add(tileStart, new Vector3d(15, 0, 15))
         
+        await world.tickingAreaManager.createTickingArea('battle:current_tile', {
+            dimension,
+            from: tileStart,
+            to: tileEnd
+        })
+
         world.structureManager.place(this.location, dimension, tileStart, {
             rotation: this.rotation
         })
+        await system.waitTicks(1)
+
         this.scanHeightmap(dimension, tileStart, tileEnd)
         this.placeDecorators(dimension, random, tileStart)
+        
+        world.tickingAreaManager.removeTickingArea('battle:current_tile')
+
+        await system.waitTicks(1)
     }
 
     private scanHeightmap(dimension: Dimension, tileStart: Vector3, tileEnd: Vector3) {
@@ -48,7 +60,7 @@ export default class Tile {
         }
     }
 
-    public async placeDecorators(dimension: Dimension, random: Random, tileStart: Vector3) {
+    public placeDecorators(dimension: Dimension, random: Random, tileStart: Vector3) {
         for (const decorator of this.decorators) {
             try {
                 decorator.place(this, dimension, random, tileStart)

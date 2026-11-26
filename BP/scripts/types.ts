@@ -1,9 +1,5 @@
 import { Vector3 } from '@minecraft/server'
-import PlacedDecorator from './world/decorators/placed_decorator'
-
-export type DefaultItemStack = {
-    lore: string[]
-}
+import PlacedDecorator from './world/decorators/placementConfig'
 
 export type PlacementOptions = {
     count?: number,

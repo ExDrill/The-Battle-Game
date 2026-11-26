@@ -29,10 +29,10 @@
 				"default": {
 					"transitions": [
 						{
-							"summoning": "query.property('battle:state') == 'summoning' && query.property('battle:second_phase') == false"
+							"summoning": "query.property('battle:state') == 'summoning' && !q.property('battle:second_phase')"
 						},
 						{
-							"rapid_summoning": "query.property('battle:state') == 'summoning' && query.property('battle:second_phase') == true"
+							"rapid_summoning": "query.property('battle:state') == 'summoning' && q.property('battle:second_phase')"
 						}
 					]
 				},
@@ -64,7 +64,7 @@
 				"default": {
 					"transitions": [
 						{
-							"roaring": "query.property('battle:state') == 'roaring' && query.property('battle:second_phase') == false"
+							"roaring": "query.property('battle:state') == 'roaring' && !q.property('battle:second_phase')"
 						}
 					]
 				},

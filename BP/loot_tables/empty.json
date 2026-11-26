@@ -1,1 +1,10 @@
-{}
+{
+    "format_version": "1.26.0",
+    "pools": [
+        {
+            "rolls": 1,
+            "bonus_rolls": 0,
+            "type": "empty"
+        }
+    ]
+}

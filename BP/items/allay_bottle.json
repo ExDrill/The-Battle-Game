@@ -5,7 +5,7 @@
 			"identifier": "battle:allay_bottle",
 			"menu_category": {
 				"category": "equipment",
-				"group": "battle:item_group.name.summon"
+				"group": "battle:item_group.summon"
 			}
 		},
 		"components": {
